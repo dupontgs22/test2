@@ -27,25 +27,7 @@ ax.xaxis_date()
 # Plotting candlestick chart
 candlestick_ohlc(ax, candlestick_data.values, width=0.6, colorup='g', colordown='r')
 
-# Plotting moving averages
-ax.plot(daily_data.index, daily_data['MA50'], color='blue', label='50-Day MA')
-ax.plot(daily_data.index, daily_data['MA200'], color='red', label='200-Day MA')
-
-# Marking when the 50-day crosses above or below the 200-day
-crossings = []
-for i in range(1, len(daily_data)):
-    if daily_data['MA50'][i] > daily_data['MA200'][i] and daily_data['MA50'][i - 1] <= daily_data['MA200'][i - 1]:
-        crossings.append((daily_data.index[i], daily_data['MA50'][i], 'golden'))
-    elif daily_data['MA50'][i] < daily_data['MA200'][i] and daily_data['MA50'][i - 1] >= daily_data['MA200'][i - 1]:
-        crossings.append((daily_data.index[i], daily_data['MA50'][i], 'death'))
-
-for date, price, marker in crossings:
-    ax.annotate(marker, xy=(date, price), xytext=(-10, 10), textcoords='offset points', arrowprops=dict(arrowstyle='->', color='black'))
-
-# Adding labels and title
-ax.set_xlabel('Date')
-ax.set_ylabel('Price')
-ax.set_title('Microsoft Stock Prices')
+# Plott
 
 # Adding legend
 ax.legend()
